@@ -23,6 +23,17 @@
         <p>Add and manage member information effortlessly—store personal details, track contributions, and keep every record organized and secure within your saving group platform.</p>
         <div class="forms_holder">
                 <form action="/save_member" method="post">
+                    {% if request.args.get('error') == 'phone_taken' %}
+                    <span style="
+                        display: block;
+                        color: #e74c3c;
+                        font-size: 12px;
+                        margin-bottom: 8px;
+                        font-weight: 200;
+                        letter-spacing: 1px;
+                        font-family: 'Epilogue', sans-serif;
+                    ">⚠ That phone number is already registered. Please use another one.</span>
+                    {% endif %}
                     <div class="input_holder">
                         <input type="text" name="first_name" placeholder="first name" required>
                         <input type="text" name="last_name" placeholder="last name" required>
@@ -36,7 +47,7 @@
                         </select>
                     </div>
                     <div class="input_holder">
-                        <input type="number" name="phone" placeholder="phone" required>
+                        <input type="number" name="phone" id="phone" placeholder="phone" required>
                         <input type="email" name="email" placeholder="email" required>
                     </div>
                     <div class="input_holder">
@@ -46,6 +57,50 @@
                 </form>
         </div>
     </div>
-        
+<script>
+    const phoneInput = document.getElementById('phone');
+    const phoneMsg  = document.getElementById('phone_msg');
+    const form      = document.querySelector('form');
+    let phoneOk     = true;
+
+    phoneInput.addEventListener('blur', async () => {
+        const phone = phoneInput.value.trim();
+        if (!phone) return;
+
+        const res  = await fetch('/check_phone', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone })
+        });
+        const data = await res.json();
+
+        if (data.taken) {
+            phoneMsg.textContent = '⚠ This phone number is already registered. Please use another one.';
+            phoneMsg.style.display = 'block';
+            phoneInput.style.borderColor = '#e74c3c';
+            phoneOk = false;
+        } else {
+            phoneMsg.style.display = 'none';
+            phoneInput.style.borderColor = '';
+            phoneOk = true;
+        }
+    });
+
+    // Clear warning as soon as user starts retyping
+    phoneInput.addEventListener('input', () => {
+        phoneMsg.style.display = 'none';
+        phoneInput.style.borderColor = '';
+        phoneOk = true;
+    });
+
+    // Block submit if phone is taken
+    form.addEventListener('submit', (e) => {
+        if (!phoneOk) {
+            e.preventDefault();
+            phoneMsg.style.display = 'block';
+            phoneInput.focus();
+        }
+    });
+</script>
 </body>
 </html>

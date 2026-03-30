@@ -1,6 +1,6 @@
 from enum import member
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -162,7 +162,6 @@ def save_position():
     log_action("position", f"{new_position.position_name} position was added")
     return redirect(url_for("positions"))
 
-
 @app.route("/pay_loan/<int:loan_id>")
 @login_required
 def pay_loan(loan_id):
@@ -235,7 +234,7 @@ def sign_up():
 def dashboard():
     info_count = Info.query.filter_by(group_id=session.get("group_id")).filter(Info.read == False).count()
     member_count = Member.query.filter(Member.group_id == session.get("group_id")).count()
-    loan_total = db.session.query(func.sum(Loan.amount))\
+    loan_total = db.session.query(func.sum(Loan.remaining_amount))\
         .filter(Loan.group_id == session.get("group_id"))\
         .scalar() or 0
     saving_total = db.session.query(func.sum(Attendance.saving))\
@@ -255,7 +254,7 @@ def dashboard_member():
     group = Group.query.get(session.get("group_id_m"))
     info_count = Info.query.filter_by(group_id=session.get("group_id_m")).filter(Info.read == False).count()
     member_count = Member.query.filter(Member.group_id == session.get("group_id_m")).count()
-    loan_total = db.session.query(func.sum(Loan.amount))\
+    loan_total = db.session.query(func.sum(Loan.remaining_amount))\
         .filter(Loan.member_id == session.get("member_id"))\
         .scalar() or 0
     saving_total = db.session.query(func.sum(Attendance.saving))\
@@ -503,6 +502,15 @@ def mark_as_read(info_id):
         db.session.commit()
     return redirect(url_for("info"))
 
+@app.route("/check_phone", methods=["POST"])
+def check_phone():
+    phone = str(request.json.get("phone", "")).strip()
+    exists = Member.query.filter(
+        Member.phone == phone,
+        Member.group_id == session.get("group_id")
+    ).first()
+    return jsonify({"taken": exists is not None})
+
 # ─── Save Routes ──────────────────────────────────────────────────────────────
 
 @app.route("/save_group", methods=["POST"])
@@ -547,11 +555,16 @@ def save_attendance():
 @app.route("/save_member", methods=["POST"])
 @login_required
 def save_member():
+    # Check for duplicate phone before inserting
+    existing = Member.query.filter_by(phone=request.form.get("phone")).first()
+    if existing:
+        return redirect(url_for("add_member") + "?error=phone_taken")
+
     new_member = Member(
         first_name=request.form.get("first_name"),
         last_name=request.form.get("last_name"),
         gender=request.form.get("gender"),
-        dob=datetime.strptime(request.form.get("dob"), "%Y-%m-%d").date(),  # fixed: parse string to date
+        dob=datetime.strptime(request.form.get("dob"), "%Y-%m-%d").date(),
         email=request.form.get("email"),
         phone=request.form.get("phone"),
         password=generate_password_hash(request.form.get("password")),
