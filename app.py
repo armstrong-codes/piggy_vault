@@ -183,7 +183,8 @@ def pay_loan_form(loan_id):
             loan.remaining_amount = 0
 
         db.session.commit()
-    log_action("loan", f"payment of {payment} was made on loan id {loan_id}")
+        member = Member.query.get(loan.member_id)  # ← get the member
+        log_action("loan", f"payment of {payment} was made by {member.first_name} {member.last_name}")
     return redirect(url_for("loan"))
 
 
