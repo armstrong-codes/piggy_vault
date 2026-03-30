@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add position</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <a href="{{ url_for('positions') }}" class="back_home_btn_sign_up"><i class="lni lni-arrow-left"></i>go back </a>
+    <div class="back_image_sign_up">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}">
+    </div>
+    <div class="sign_up_holder">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+        <h1>add position</h1>
+        <p>Add and assign system user positions to efficiently manage roles, permissions, and responsibilities across your platform in one place.</p>
+        <div class="forms_holder">
+                <form action="/save_position" method="post">
+                    <div class="input_holder">
+                        <input type="text" placeholder="position name" style="width: 100%;" name="position_name">
+                    </div>
+                    <button type="submit"><i class="lni lni-plus"></i> add position</button>
+                </form>
+        </div>
+    </div>
+        
+</body>
+</html>

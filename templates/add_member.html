@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add member</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <a href="{{ url_for('members') }}" class="back_home_btn_sign_up"><i class="lni lni-arrow-left"></i>go back </a>
+    <div class="back_image_sign_up">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}">
+    </div>
+    <div class="sign_up_holder">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+        <h1>add member</h1>
+        <p>Add and manage member information effortlessly—store personal details, track contributions, and keep every record organized and secure within your saving group platform.</p>
+        <div class="forms_holder">
+                <form action="/save_member" method="post">
+                    <div class="input_holder">
+                        <input type="text" name="first_name" placeholder="first name" required>
+                        <input type="text" name="last_name" placeholder="last name" required>
+                    </div>
+                    <div class="input_holder">
+                        <input type="date" name="dob" required>
+                        <select name="gender" id="" required>
+                            <option value="" disabled selected style="color: grey;">choose gender</option>
+                            <option value="Male">male</option>
+                            <option value="Female">female</option>
+                        </select>
+                    </div>
+                    <div class="input_holder">
+                        <input type="number" name="phone" placeholder="phone" required>
+                        <input type="email" name="email" placeholder="email" required>
+                    </div>
+                    <div class="input_holder">
+                        <input type="text" name="password" placeholder="password" style="width: 100%;" required>
+                    </div>
+                    <button type="submit"><i class="lni lni-plus"></i> add member</button>
+                </form>
+        </div>
+    </div>
+        
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>piggy vault</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <img src="{{ url_for('static', filename='images/image3.jpg') }}" alt="" style="z-index: -1; width: 100%; position: absolute; top: 0; opacity: 30%;">
+    <nav>
+        <div class="logo_holder">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+            <h1>piggy vault</h1>
+        </div>
+        <button class="side_btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="side_tab">
+            <button class="close_btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <ul class="nav_bar">
+                <li><a href="#about">about</a></li>            
+                <li><a href="#price">pricing</a></li>            
+                <li><a href="#contact">info</a></li>            
+            </ul>
+            <div class="button_holder">
+                <a href="{{ url_for('login') }}"><i class="lni lni-arrow-angular-top-left"></i>login</a>
+                <span></span>
+                <a href="{{ url_for('sign_up') }}"><i class="lni lni-arrow-angular-top-left"></i>sign up</a>
+            </div>
+        </div>
+    </nav>
+    <section id="landing_sec">
+        <div class="words_holder">
+            <div class="top_title">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+                <p>built for shared goal</p>
+            </div>
+            <h1 class="title">let’s get <span>digital</span> together! <br> <span>—save</span> with us</h1>
+            <p class="paragraph">Create your own saving group, track contributions, and gain smart insights — all in one simple, digital experience.</p>
+            <a href="#" class="button_to_start"><i class="lni lni-arrow-angular-top-left"></i>start saving together</a>
+            <p class="tagline">Save together. Track smarter. Grow faster.</p>
+        </div>
+        <div class="picture_holder">
+            <img src="{{ url_for('static', filename='images/Black and orange coin with bull silhouette t.png') }}" alt="">
+            <img src="{{ url_for('static', filename='images/Black and orange coin with bull silhouette ts.png') }}" alt="">
+        </div>
+    </section>
+    <section id="about">
+        <div class="top_title">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+            <p>know more about us</p>
+        </div>
+        <h1 class="title">what is <span>piggy vault</span>?</h1>
+        <p class="paragraph">Piggy Vault is a digital group savings system that helps people save together securely, track contributions transparently, and achieve shared financial goals.</p>
+        <div class="numbers">
+            <div class="for_nums">
+                <h1>22k <i class="lni lni-plus"></i></h1>
+                <span>groups</span>
+            </div>
+            <div class="for_nums">
+                <h1>2k <i class="lni lni-plus"></i></h1>
+                <span>users</span>
+            </div>
+        </div>
+    </section>
+    <section id="price">
+        <div class="top_title">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+            <p>choose an affordable pricing plan</p>
+        </div>
+        <h1 class="title">do you <span>want</span> to use <span>piggy vault</span>? </h1>
+        <p class="paragraph">Piggy Vault offers flexible and affordable pricing plans to fit every saving group. Choose a plan that grows with your group’s saving goals.</p>
+        <div class="card_holder">
+            <div class="card">
+                <div class="top_indicator">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+                    <p class="">best for groups</p>
+                </div>
+                <div class="price_tag">
+                    <p>basic plan</p>
+                    <h1>$59 <span>per month</span></h1>
+                </div>
+                <div class="line"></div>
+                <div class="features">
+                    <h2>features</h2>
+                    <p>You’ll be able to use it for a month</p>
+                    <ul>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Monthly access to the system</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Core features & tools</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Secure cloud access</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Cancel anytime</li>
+                    </ul>
+                </div>
+                <a href="#" class="get_started_btn"><i class="lni lni-arrow-angular-top-left"></i> get started</a>
+            </div>
+            <div class="card">
+                <div class="top_indicator">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+                    <p class="">most popular</p>
+                </div>
+                <div class="price_tag">
+                    <p>premium plan</p>
+                    <h1>$149 <span>per year</span></h1>
+                </div>
+                <div class="line"></div>
+                <div class="features">
+                    <h2>features</h2>
+                    <p>You’ll be able to use it for a year</p>
+                    <ul>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Full access for 12 months</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> All Basic Plan features included</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Discounted yearly pricing</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Access to new features first</li>
+                    </ul>
+                </div>
+                <a href="#" class="get_started_btn"><i class="lni lni-arrow-angular-top-left"></i> get started</a>
+            </div>
+            <div class="card">
+                <div class="top_indicator">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+                    <p class="">best for organization</p>
+                </div>
+                <div class="price_tag">
+                    <p>golden plan</p>
+                    <h1>$2450 <span>for ownership</span></h1>
+                </div>
+                <div class="line"></div>
+                <div class="features">
+                    <h2>features</h2>
+                    <p>You’ll be owning the system</p>
+                    <ul>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Lifetime ownership of the system</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> All Premium Plan features included</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Unlimited usage</li>
+                        <li><img src="{{ url_for('static', filename='images/logo.svg') }}" alt=""> Full administrative control</li>
+                    </ul>
+                </div>
+                <a href="#" class="get_started_btn"><i class="lni lni-arrow-angular-top-left"></i> get started</a>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="words">
+            <img src="{{ url_for('static', filename='images/Black and orange coin with bull silhouette t.png') }}" class="coin1">
+            <img src="{{ url_for('static', filename='images/Black and orange coin with bull silhouette ts.png') }}" class="coin2">
+            <div class="top_title">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+                <p>get in touch with us</p>
+            </div>
+            <h1>Have <span>questions</span> or <span>feedback</span>?</h1>
+            <p class="paragraph">We value your feedback, so please contact us if you encounter any issues or need to tell us about anything else using the details below.</p>
+            <a href=""><i class="lni lni-arrow-angular-top-left"></i> piggyvault1@gmail.com</a>
+        </div>
+        <div class="form_holder">
+            <h1>leave us a <span>message</span>!</h1>
+            <form action="" method="post">
+                <input type="text" placeholder="your name">
+                <input type="email" placeholder="your email">
+                <textarea name="" id="" placeholder="your message"></textarea>
+                <button type="submit" ><i class="lni lni-arrow-angular-top-left"></i> send <span>message</span></button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="footer_title">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+            <p>piggy vault</p>
+        </div>
+        <ul>
+            <li><a href="#about">about</a></li>            
+            <li><a href="#price">pricing</a></li>            
+            <li><a href="#contact">info</a></li> 
+        </ul>
+        <p class="copyright">© 2025. All rights reserved.</p>
+    </footer>
+<script>
+    const sideBtn = document.querySelector('.side_btn');
+    const sideTab = document.querySelector('.side_tab');
+    const closeBtn = document.querySelector('.close_btn');
+
+    // ✅ This was missing!
+    sideBtn.addEventListener('click', () => {
+        sideTab.classList.toggle('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        sideTab.classList.remove('active');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!sideBtn.contains(e.target) && !sideTab.contains(e.target)) {
+            sideTab.classList.remove('active');
+        }
+    });
+</script>
+</body>
+</html>

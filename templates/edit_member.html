@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit member</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <a href="{{ url_for('members') }}" class="back_home_btn_sign_up"><i class="lni lni-arrow-left"></i>go back </a>
+    <div class="back_image_sign_up">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}">
+    </div>
+    <div class="sign_up_holder">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+        <h1>edit member</h1>
+        <p>Add and manage member information effortlessly—store personal details, track contributions, and keep every record organized and secure within your saving group platform.</p>
+        <div class="forms_holder">
+            <form action="/update_member/{{ member.member_id }}" method="post">
+                <div class="input_holder">
+                    <input type="text" name="first_name" value="{{ member.first_name }}" required>
+                    <input type="text" name="last_name" value="{{ member.last_name }}" required>
+                </div>
+                <div class="input_holder">
+                    <select name="gender">
+                        <option value="Male" {% if member.gender == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if member.gender == 'Female' %}selected{% endif %}>Female</option>
+                    </select>
+                    <input type="date" name="dob" value="{{ member.dob.strftime('%Y-%m-%d') }}" required>
+                </div>
+                <div class="input_holder">
+                    <input type="email" name="email" value="{{ member.email }}">
+                    <input type="text" name="phone" value="{{ member.phone }}" required>
+                </div>
+                <button type="submit"><i class="lni lni-plus"></i> edit member</button>
+            </form>
+        </div>
+    </div>
+        
+</body>
+</html>

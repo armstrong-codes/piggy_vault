@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <a href="{{ url_for('home') }}" class="back_home_btn_sign_up"><i class="lni lni-arrow-left"></i>go back </a>
+    <div class="back_image_sign_up">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}">
+    </div>
+    <div class="sign_up_holder">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+        <h1>sign up</h1>
+        <p>Sign up to access the saving group platform and securely manage contributions, records, and insights in one place.</p>
+        <div class="forms_holder">
+                <form action="/save_group" method="post">
+                    <div class="input_holder">
+                        <input type="text" name="group_name" placeholder="your group name" required style="width: 100%;">
+                    </div>
+                    <div class="input_holder">
+                        <select name="country" id="country" required>
+                            <option value="" disabled selected>Select your country</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Tanzania">Tanzania</option>
+                        </select>
+                        <input type="email" name="email" placeholder="your email" required>
+                    </div>
+                    <div class="input_holder">
+                        <input type="text" name="username" placeholder="your username" required>
+                        <input type="password" name="password" placeholder="your password" required>
+                    </div>
+                    <button type="submit"><i class="lni lni-arrow-angular-top-left"></i> sign up</button>
+                </form>
+            <div class="create_words">
+                <p>already have an account? | <a href="{{ url_for('login') }}"><i class="lni lni-arrow-angular-top-left"></i> log in</a></p>
+            </div>
+        </div>
+    </div>
+        
+</body>
+</html>

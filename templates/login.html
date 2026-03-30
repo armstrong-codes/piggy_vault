@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <a href="{{ url_for('home') }}" class="back_home_btn_login"><i class="lni lni-arrow-left"></i>go back </a>
+    <div class="back_image_login">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}">
+    </div>
+    <div class="login_holder">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+        <h1>log in</h1>
+        <p>Sign in to continue managing your savings groups, tracking contributions, and viewing smart financial insights.</p>
+        <div class="button_holder_group">
+            <button id="adminBtn" class="active">as admin</button>
+            <button id="memberBtn">as member</button>
+        </div>
+        <div class="forms_holder">
+            <div class="slide_holder">
+                <div class="admins_form">
+                    <form action="/login" method="post">
+                        {% if error %}
+                        <p style="color: red;">{{ error }}</p>
+                        {% endif %}
+                        <input type="text" placeholder="your username" name="username" id="username_input" required autocomplete="off">
+                        <input type="password" placeholder="your password" name="password" required>
+                        <select name="group_id" id="group_select" required>
+                            <option value="" disabled selected style="color: gray;">choose your group name</option>
+                            {% for group in groups_list %}
+                                <option value="{{ group.group_id }}" data-username="{{ group.username }}">{{ group.group_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit"><i class="lni lni-arrow-angular-top-left"></i> login</button>
+                    </form>
+                    <div class="create_words">
+                        <p>i don't have an account | <a href="{{ url_for('sign_up') }}"><i class="lni lni-arrow-angular-top-left"></i> create one</a></p>
+                    </div>
+                </div>
+                <div class="members_form">
+                    <form action="/login_member" method="post">
+                        <input type="number" placeholder="your number" name="number">
+                        <input type="password" placeholder="your password" name="password">
+                        <button type="submit"><i class="lni lni-arrow-angular-top-left"></i> login</button>
+                    </form>
+                    <div class="create_words">
+                        <p>i don't have an account | <a href="{{ url_for('sign_up') }}"><i class="lni lni-arrow-angular-top-left"></i> create one</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const slideHolder = document.querySelector('.slide_holder');
+    const adminBtn = document.getElementById('adminBtn');
+    const memberBtn = document.getElementById('memberBtn');
+    const usernameInput = document.getElementById('username_input');
+    const groupSelect = document.getElementById('group_select');
+    const allOptions = Array.from(groupSelect.options);
+    
+    // When clicking "as member" → slide left
+    memberBtn.addEventListener('click', () => {
+        slideHolder.style.left = '-100%';
+        memberBtn.classList.add('active');
+        adminBtn.classList.remove('active');
+    });
+    
+    // When clicking "as admin" → go back
+    adminBtn.addEventListener('click', () => {
+        slideHolder.style.left = '0';
+        adminBtn.classList.add('active');
+        memberBtn.classList.remove('active');
+    });
+
+    usernameInput.addEventListener('input', () => {
+        const typed = usernameInput.value.toLowerCase();
+
+        // remove all options except the placeholder
+        groupSelect.innerHTML = '<option value="" disabled selected style="color: gray;">choose your group name</option>';
+
+        // filter and add matching options
+        allOptions.forEach(option => {
+            if (option.dataset.username && option.dataset.username.toLowerCase().includes(typed)) {
+                groupSelect.appendChild(option.cloneNode(true));
+            }
+        });
+
+        // if only one match, auto select it
+        if (groupSelect.options.length === 2) {
+            groupSelect.options[1].selected = true;
+        }
+    });
+</script>
+</body>
+</html>

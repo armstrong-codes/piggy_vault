@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>system info</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <div class="dashboard_back_image">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}" alt="">
+    </div>
+    <div class="dash_whole_holder">
+        <div class="nav_tabs">
+            <div class="logo_name_holder">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+                <h1>{{ session.get('group_name') }}</h1>
+                <p>{{ session.get('country') }}</p>
+            </div>
+            <div class="line"></div>
+            <ul>
+                <li><a href="{{ url_for('dashboard') }}"><i class="lni lni-gauge-1"></i> <span>dashboard</span></a></li>
+                <li><a href="{{ url_for('members') }}"><i class="lni lni-user-4"></i> <span>members</span></a></li>
+                <li><a href="{{ url_for('attendance') }}"><i class="lni lni-menu-cheesburger"></i> <span>attendance</span></a></li>
+                <li><a href="{{ url_for('loan') }}"><i class="lni lni-refresh-dollar-1"></i> <span>loan</span></a></li>
+                <li><a href="{{ url_for('managers') }}"><i class="lni lni-hierarchy-1"></i> <span>managers</span></a></li>
+                <li><a href="{{ url_for('info') }}" class="active_nav"><i class="lni lni-notebook-1"></i> <span>system info</span></a></li>
+                <!-- <li><a href="{{ url_for('positions') }}"><i class="lni lni-certificate-badge-1"></i> <span>positions</span></a></li> -->
+            </ul>
+            <a href="{{ url_for('logout') }}" class="logout_dashboard"><i class="lni lni-exit"></i> <span>logout</span></a>
+        </div>
+        <div class="display_tab">
+            <div class="header_display">
+                <div class="title_display">
+                    <h1>system info</h1>
+                    <p>overview of all information flowing in your system</p>
+                </div>
+                <div class="others_display">
+                    <form action="" method="post">
+                        <div class="search_bar">
+                            <input type="text" placeholder="search">
+                            <button type="submit"><i class="lni lni-search-1"></i></button>
+                        </div>
+                    </form>
+                    <a href="{{ url_for('info') }}" class="notification"><i class="lni lni-bell-1" {% if info_count > 0 %}style="color: #f84210;"{% endif %}></i> {% if info_count > 0 %}<span>{{ info_count }}</span>{% endif %}</a>
+                    <div class="user_details">
+                        <!-- <div class="user_image"><i class="lni lnis-user-4"></i></div> -->
+                        <h1>admin</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- <button class="add_things_btn"><i class="lni lni-plus"></i> add a member</button> -->
+            <div class="table_list_holder">
+                <div class="table_list_header">
+                    <div class="title_holder">
+                        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+                        <h1>list of all system info</h1>
+                    </div>
+                    <form action="" method="post">
+                        <div class="search_bar">
+                            <input type="text" placeholder="filter something...">
+                            <button type="submit"><i class="lni lni-funnel-1"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="line"></div>
+                <div class="table_list">
+                    <table>
+                        <tr class="table_head">
+                            <th>no</th>
+                            <th>about</th>
+                            <th>information</th>
+                            <th>date</th>
+                            <th>action</th>
+                        </tr>
+                        {% for item in info_list %}
+                        <tr class="table_row">
+                            <td>{{ loop.index }}</td>
+                            <td>{{ item.about }}</td>
+                            <td>{{ item.info }}</td>
+                            <td>{{ item.date.strftime('%d-%m-%Y') }}</td>
+                            <td class="mark_as_read_holder">
+                                {% if item.read %}
+                                    <span><i class="lni lni-check"></i> read</span>
+                                {% else %}
+                                    <a href="{{ url_for('mark_as_read', info_id=item.info_id) }}"><i class="lni lni-flag-2"></i> mark as read</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr class="table_row">
+                            <td colspan="5" style="text-align: center;">no system info found</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

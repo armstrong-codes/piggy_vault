@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <a href="{{ url_for('managers') }}" class="back_home_btn_sign_up"><i class="lni lni-arrow-left"></i>go back</a>
+    <div class="back_image_sign_up">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}">
+    </div>
+    <div class="sign_up_holder">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+        <h1>edit manager</h1>
+        <p>Update manager account details below.</p>
+        <div class="forms_holder">
+            <form action="/update_manager/{{ manager.group_id }}" method="post">
+                <div class="input_holder">
+                    <input type="text" name="group_name" value="{{ manager.group_name }}" placeholder="group name" required>
+                    <input type="text" name="country" value="{{ manager.country }}" placeholder="country">
+                </div>
+                <div class="input_holder">
+                    <input type="text" name="username" value="{{ manager.username }}" placeholder="username" required>
+                    <input type="email" name="email" value="{{ manager.email }}" placeholder="email">
+                </div>
+                <div class="input_holder">
+                    <input type="password" name="password" style="width: 100%;" placeholder="new password (leave blank to keep current)">
+                </div>
+                <button type="submit"><i class="lni lni-pencil-1"></i> update manager</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

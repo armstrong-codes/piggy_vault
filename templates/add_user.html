@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add user</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.lineicons.com/5.1/line/lineicons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/x-icon">
+</head>
+<body>
+    <a href="{{ url_for('managers') }}" class="back_home_btn_sign_up"><i class="lni lni-arrow-left"></i>go back </a>
+    <div class="back_image_sign_up">
+        <img src="{{ url_for('static', filename='images/image1.jpg') }}">
+    </div>
+    <div class="sign_up_holder">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+        <h1>add user</h1>
+        <p>Add new users to your saving group platform and securely manage their information, track contributions, and keep records organized in one place.</p>
+        <div class="forms_holder">
+                <form action="" method="post">
+                    <div class="input_holder">
+                        <select name="" id="">
+                            <option value="" disabled selected style="color: grey;">choose person</option>
+                            <option value="">male</option>
+                            <option value="">female</option>
+                        </select>
+                        <select name="" id="">
+                            <option value="" disabled selected style="color: grey;">choose position</option>
+                            <option value="">male</option>
+                            <option value="">female</option>
+                        </select>
+                    </div>
+                    <div class="input_holder">
+                        <input type="text" placeholder="username">
+                        <input type="text" placeholder="password">
+                    </div>
+                    <button type="submit"><i class="lni lni-plus"></i> add user</button>
+                </form>
+        </div>
+    </div>
+        
+</body>
+</html>
